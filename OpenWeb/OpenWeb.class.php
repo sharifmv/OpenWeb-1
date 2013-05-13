@@ -36,6 +36,7 @@ class OpenWeb {
         $template = LINK . "templates/" . $file . ".tpl";
         if( (!is_file($template)) || (filesize($template) == 0) ) {
             throw new Exception("Template file is missing or empty");
+            exit();
         }
         $data = $this->read($template);
 
@@ -54,7 +55,22 @@ class OpenWeb {
     }
 
     protected function process($data, $assign) {
-        // Part 1: Variable Replacement (Assigned Variables)
+        // Part 1: Template Inclusions
+        preg_match_all('/\<'.$this->syntax.'\:include="(.*)" \/\>/', $data, $match);
+        $max = count($match[1]);
+        $i = 0;
+        while($i != $max) {
+            $file = LINK . "templates/" . $match[1][$i] . ".tpl";
+            if(!is_file($file)) {
+                throw new Exception("Template file is missing or empty");
+                exit();
+            }
+            $data2 = $this->read($file);
+            $data = str_replace($match[0][$i], $data2, $data);
+            $i++;
+        }
+
+        // Part 2: Variable Replacement (Assigned Variables)
         if(!is_array($assign)) {
             return false;
         }
