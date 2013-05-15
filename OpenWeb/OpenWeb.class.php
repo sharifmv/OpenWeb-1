@@ -5,7 +5,7 @@
  * The OpenWeb Template Engine
  * --------------------------------------
  * Written by Liam Demafelix
- * Copyright (c) 2012
+ * Copyright (c) 2013
  * Licensed under the MIT license (FOSS)
  * Version 0.1
  * --------------------------------------

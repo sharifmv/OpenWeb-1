@@ -1,10 +1,7 @@
 <?php
+
 /**
- * Created by JetBrains PhpStorm.
- * User: Liam
- * Date: 5/13/13
- * Time: 12:53 PM
- * To change this template use File | Settings | File Templates.
+ * Sample Code
  */
 
 define('LINK', './');
