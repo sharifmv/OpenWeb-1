@@ -31,7 +31,7 @@ class OpenWeb {
         return self::$__ow_Instance;
     }
 
-    public function start($file, $assign = "") {
+    public function start($file, $assign = array()) {
         // Read if the file exists
         $template = LINK . "templates/" . $file . ".tpl";
         if( (!is_file($template)) || (filesize($template) == 0) ) {
@@ -71,9 +71,6 @@ class OpenWeb {
         }
 
         // Part 2: Variable Replacement (Assigned Variables)
-        if(!is_array($assign)) {
-            return false;
-        }
         foreach($assign as $var_name => $var_value) {
             preg_match_all('/\<'.$this->syntax.'\:variable="'.$var_name.'" \/\>/', $data, $match);
             $matches = $match[0];
