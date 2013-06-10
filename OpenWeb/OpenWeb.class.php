@@ -56,13 +56,13 @@ class OpenWeb {
 
     protected function process($data, $assign) {
         // Part 1: Template Inclusions
-        preg_match_all('/\<'.$this->syntax.'\:include="(.*)" \/\>/', $data, $match);
+        preg_match_all('/\<'.$this->syntax.'\:include="([_a-zA-Z0-9]+)" \/\>/', $data, $match);
         $max = count($match[1]);
         $i = 0;
         while($i != $max) {
             $file = LINK . "templates/" . $match[1][$i] . ".tpl";
             if(!is_file($file)) {
-                throw new Exception("Template file is missing or empty");
+                throw new Exception("Template file `{$file}` is missing or empty");
                 exit();
             }
             $data2 = $this->read($file);
